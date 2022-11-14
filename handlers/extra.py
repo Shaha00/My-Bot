@@ -20,21 +20,15 @@ async def echo(message: types.Message):
 
     if message.text == 'game':
         if message.from_user.id not in ADMINS:
-            await message.answer("Ты не мой босс!")
-        emoji = choice('⚽,'
-                       '🏀,'
-                       '🎲,'
-                       '🎯,'
-                       '🎳,'
-                       '🎰')
-        await bot.send_dice(message.chat.id, emoji=emoji)
-
-    if message.chat.type == "group":
-        if message.text.startswith('!'):
-            await bot.pin_chat_message(message.chat.id,
-                                       message.reply_to_message.from_user.id)
-            await message.answer(f'{message.from_user.first_name} братан закрепил '
-                                 f'{message.reply_to_message.from_user.full_name}')
+            await message.answer("Ты нот админ!")
+        else:
+            emoji = choice('⚽'
+                           '🏀'
+                           '🎲'
+                           '🎯'
+                           '🎳'
+                           '🎰')
+            await bot.send_dice(message.chat.id, emoji=emoji)
 
 
 def register_handlers_extra(dp: Dispatcher):
