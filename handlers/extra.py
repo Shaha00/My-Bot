@@ -22,11 +22,11 @@ async def echo(message: types.Message):
         if message.from_user.id not in ADMINS:
             await message.answer("Ты нот админ!")
         else:
-            emoji = choice('⚽'
-                           '🏀'
-                           '🎲'
-                           '🎯'
-                           '🎳'
+            emoji = choice('⚽,'
+                           '🏀,'
+                           '🎲,'
+                           '🎯,'
+                           '🎳,'
                            '🎰')
             await bot.send_dice(message.chat.id, emoji=emoji)
 

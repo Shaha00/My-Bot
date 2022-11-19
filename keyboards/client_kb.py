@@ -48,4 +48,7 @@ direction_markup = ReplyKeyboardMarkup(
 ).add(
     KeyboardButton('BACKEND'),
     KeyboardButton('FRONTEND'),
+    KeyboardButton('ANDROID'),
+    KeyboardButton('IOS'),
+    KeyboardButton('UI/UX'),
 )

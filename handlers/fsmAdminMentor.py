@@ -23,7 +23,7 @@ async def fsm_start(message: types.Message):
             await message.answer("Введите ваше Имя?",
                                  reply_markup=cancel_markup)
         else:
-            await message.answer("ты нот мой админ!")
+            await message.answer("Вы не мой Администратор!")
     else:
         await message.answer("Пиши в личку!")
 
@@ -62,15 +62,21 @@ async def load_age(message: types.Message, state: FSMContext):
             await FSMAdmin.next()
             await message.answer("Какая группа?")
         else:
-            await message.answer("Доступ воспрещен!")
+            await message.answer("Ваш возраст не подходит!")
     except:
-        await message.answer("Пиши нормально!")
+        await message.answer("Пишите корректно!")
 
 
 async def load_group(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['group'] = message.text
-        await message.answer(f"{data['name']}\n{data['id']}\n{data['direction']}\n{data['age']}\n{data['username']}")
+        await message.answer(
+            f"Имя - {data['name']}\n"
+            f"id-шка - {data['id']}\n"
+            f"Направление - {data['direction']}\n"
+            f"Возраст - {data['age']}\n"
+            f"Группа - {data['group']}\n"
+            f"{data['username']}")
     await FSMAdmin.next()
     await message.answer("Все правильно?", reply_markup=submit_markup)
 
@@ -79,12 +85,12 @@ async def submit(message: types.Message, state: FSMContext):
     if message.text.lower() == "да":
         # Запись в БД
         await state.finish()
-        await message.answer("Все свободен!")
+        await message.answer("Регистрация завершена успешно!")
     elif message.text.lower() == "нет":
         await state.finish()
         await message.answer("Отмена")
     else:
-        await message.answer("Нипонял!?")
+        await message.answer("Ваш запрос не понятен!")
 
 
 async def cancel_reg(message: types.Message, state: FSMContext):
