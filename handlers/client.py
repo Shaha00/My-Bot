@@ -2,6 +2,7 @@ from aiogram import Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot, dp
 from keyboards.client_kb import start_markup
+from database.bot_db import sql_command_random
 
 
 # @dp.message_handler(commands=['start', 'help'])
@@ -49,8 +50,14 @@ async def mem(message):
     await bot.send_photo(message.from_user.id, photo=photo)
 
 
+async def get_random_user(message: types.Message):
+    await sql_command_random(message)
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(start_handler, commands=['start', 'help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem, commands=['mem'])
     dp.register_message_handler(info_handler, commands=['info'])
+    dp.register_message_handler(get_random_user, commands=['get'])
+
