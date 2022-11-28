@@ -13,8 +13,8 @@ def sql_create():
 
     db.execute("CREATE TABLE IF NOT EXISTS anketa "
                "(id INTEGER PRIMARY KEY, username TEXT, "
-               "name TEXT, id2 INTEGER, direction TEXT, "
-               "age INTEGER, groupp TEXT)")
+               "name TEXT, age INTEGER, gender TEXT, "
+               "region TEXT, photo TEXT)")
     db.commit()
 
 

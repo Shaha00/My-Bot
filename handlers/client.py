@@ -3,6 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot, dp
 from keyboards.client_kb import start_markup
 from database.bot_db import sql_command_random
+from parser import animations
 
 
 # @dp.message_handler(commands=['start', 'help'])
@@ -50,14 +51,31 @@ async def mem(message):
     await bot.send_photo(message.from_user.id, photo=photo)
 
 
+async def uwu(message):
+    photo = open("media/9f76115ee81f3da997a76978d59111fe.jpg", 'rb')
+    await bot.send_photo(message.from_user.id, photo=photo, caption="Не болей <3")
+
+
 async def get_random_user(message: types.Message):
     await sql_command_random(message)
+
+
+async def parser_projects(message: types.Message):
+    items = animations.parser()
+    for item in items:
+        await message.answer(
+            f"{item['link']}\n\n"
+            f"{item['title']}\n"
+            f"{item['info']}\n"
+        )
 
 
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(start_handler, commands=['start', 'help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(mem, commands=['mem'])
+    dp.register_message_handler(uwu, commands=['uwu'])
     dp.register_message_handler(info_handler, commands=['info'])
     dp.register_message_handler(get_random_user, commands=['get'])
+    dp.register_message_handler(parser_projects, commands=['parser'])
 
