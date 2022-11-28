@@ -1,6 +1,3 @@
-import datetime
-from pprint import pprint
-
 import requests
 from bs4 import BeautifulSoup as BS
 
@@ -46,11 +43,4 @@ def parser():
         raise Exception("Error in parser!")
 
 
-start = datetime.datetime.now()
-
-a = parser()
-print(len(a))
-pprint(a)
-
-print(datetime.datetime.now() - start)
 
